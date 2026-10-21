@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-main: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --bg-sidebar: #FFFFFF;
+  --bg-slate950: #F1F5F9;
+  --border-slate: #E2E8F0;
+  --text-main: #0F172A;
+  --text-muted: #64748B;
+  --text-white: #0F172A;
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(226, 232, 240, 0.8);
+}
+
+html.dark {
+  --bg-main: #0F172A;
+  --bg-card: #1E293B;
+  --bg-sidebar: #0F172A;
+  --bg-slate950: #020617;
+  --border-slate: #334155;
+  --text-main: #F8FAFC;
+  --text-muted: #94A3B8;
+  --text-white: #FFFFFF;
+  --glass-bg: rgba(30, 41, 59, 0.65);
+  --glass-border: rgba(51, 65, 85, 0.5);
+}
+
+@layer base {
+  body {
+    background-color: var(--bg-main) !important;
+    color: var(--text-main) !important;
+    font-family: 'Inter', 'Poppins', sans-serif;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+}
+
+/* Light Mode Overrides for Tailwind Slate Colors */
+.bg-\[\#0F172A\], .bg-slate-900, .bg-slate-900\/70, .bg-slate-900\/90, .bg-slate-900\/10 {
+  background-color: var(--bg-main) !important;
+}
+.bg-slate-950, .bg-slate-950\/40, .bg-slate-950\/20 {
+  background-color: var(--bg-slate950) !important;
+}
+.glass-panel, .bg-slate-800\/40, .bg-slate-800\/30, .bg-slate-800, .bg-slate-800\/80 {
+  background-color: var(--bg-card) !important;
+}
+.glass-panel {
+  background: var(--glass-bg) !important;
+  border-color: var(--glass-border) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+.border-slate-800, .border-slate-850, .border-slate-750, .border-slate-700, .border-slate-800\/80, .border-slate-850\/60, .border-slate-800\/60, .border-slate-700\/60 {
+  border-color: var(--border-slate) !important;
+}
+.text-slate-200, .text-slate-355, .text-slate-350, .text-slate-250, .text-slate-220, .text-white {
+  color: var(--text-main) !important;
+}
+.text-slate-400, .text-slate-500, .text-slate-450 {
+  color: var(--text-muted) !important;
+}
+
+/* Glassmorphism card utility */
+.glass-panel {
+  background: rgba(30, 41, 59, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: rgba(108, 99, 255, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(108, 99, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Text editor layout line numbers gutter */
+.line-numbers-gutter {
+  font-family: monospace;
+  text-align: right;
+  user-select: none;
+}
+
+/* Gradient text */
+.text-gradient {
+  background: linear-gradient(135deg, #6C63FF 0%, #5B8CFF 50%, #00D4FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-purple-blue {
+  background: linear-gradient(135deg, #6C63FF 0%, #5B8CFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom Scrollbar for premium dark theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0F172A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1E293B;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Glow effects */
+.glow-primary {
+  box-shadow: 0 0 20px 2px rgba(108, 99, 255, 0.15);
+}
+
+.glow-accent {
+  box-shadow: 0 0 20px 2px rgba(0, 212, 255, 0.15);
+}
+
+/* Animations classes */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s infinite;
+}
+
+/* Coding text cursor animation */
+.blinking-cursor::after {
+  content: '|';
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}

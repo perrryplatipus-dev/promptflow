@@ -1,0 +1,56 @@
+[
+  {
+    "id": "run-1790621720585",
+    "projectId": "proj-1790621693680",
+    "projectName": "Email Generator",
+    "date": "2026-09-28T18:55:20.586Z",
+    "promptA": "Write an email to a customer about a delayed order.",
+    "promptB": "Write a polite and professional email to a customer\nabout a delayed order. Apologize for the inconvenience,\nexplain the delay briefly, and provide a clear next step.",
+    "variables": {},
+    "outputA": "Dear Customer,\n\nThank you for reaching out to PromptFlow Support. We sincerely apologize for the inconvenience you've experienced with your latency peaks.\n\nOur engineering team has identified a minor caching issue on the socket gateways which affected streaming speeds for a short period. This has now been fully resolved. We have also credited 5,000 free tokens to your balance as a gesture of goodwill.\n\nIf you have any further questions or if the problem persists, please reply directly to this message.\n\nBest regards,\nPromptFlow Support Team",
+    "outputB": "Dear Customer,\n\nThank you for reaching out to PromptFlow Support. We sincerely apologize for the inconvenience you've experienced with your latency peaks.\n\nOur engineering team has identified a minor caching issue on the socket gateways which affected streaming speeds for a short period. This has now been fully resolved. We have also credited 5,000 free tokens to your balance as a gesture of goodwill.\n\nIf you have any further questions or if the problem persists, please reply directly to this message.\n\nBest regards,\nPromptFlow Support Team",
+    "latencyA": 7488,
+    "latencyB": 7529,
+    "tokensA": 137,
+    "tokensB": 137,
+    "costA": 0.000027400000000000002,
+    "costB": 0.000027400000000000002,
+    "winner": "B",
+    "scores": {
+      "tone": 8.8,
+      "accuracy": 9.8,
+      "length": 9.2,
+      "grammar": 8.8,
+      "overall": 9.15
+    },
+    "userId": "maitri@gmail.com"
+  },
+  {
+    "id": "run-1785432110900",
+    "projectId": "proj-1785432098879",
+    "projectName": "Saas",
+    "date": "2026-07-30T17:21:50.900Z",
+    "promptA": "You are an elite SaaS marketer. Write a compelling headline and subheadline for our new developer-focused AI tool PromptFlow. Target audience is {audience} and tone should be {tone}.",
+    "promptB": "Act as a developer copywriter. Write a headline and subheadline for PromptFlow, a tool that helps developers A/B test AI prompts. Use tech jargon, make it direct, clear and focused on speed. Target audience is {audience} and tone should be {tone}.",
+    "variables": {
+      "audience": "Software Engineers",
+      "tone": "Professional & Direct"
+    },
+    "outputA": "# Transform Your Prompt Workflow 🚀\n\nStop guessing what works. **PromptFlow** lets you A/B test system prompts, analyze latency metrics, and inspect outputs side-by-side. \n\n### Why Choose Us?\n1. **Real-time Streaming**: Instant Socket.io feedback.\n2. **Automated Metrics**: Intelligent scoring on tone, grammar, and accuracy.\n3. **Optimized for Software Engineers**: High performance, zero friction.\n\n*Get started today and increase prompt accuracy by up to 43%!*",
+    "outputB": "# Transform Your Prompt Workflow 🚀\n\nStop guessing what works. **PromptFlow** lets you A/B test system prompts, analyze latency metrics, and inspect outputs side-by-side. \n\n### Why Choose Us?\n1. **Real-time Streaming**: Instant Socket.io feedback.\n2. **Automated Metrics**: Intelligent scoring on tone, grammar, and accuracy.\n3. **Optimized for Software Engineers**: High performance, zero friction.\n\n*Get started today and increase prompt accuracy by up to 43%!*",
+    "latencyA": 6791,
+    "latencyB": 6917,
+    "tokensA": 116,
+    "tokensB": 116,
+    "costA": 0.0000232,
+    "costB": 0.0000232,
+    "winner": "Tie",
+    "scores": {
+      "tone": 7.9,
+      "accuracy": 9.1,
+      "length": 8.7,
+      "grammar": 8.8,
+      "overall": 8.63
+    }
+  }
+]

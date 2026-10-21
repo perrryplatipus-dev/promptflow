@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  name      String?
+  password  String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Project {
+  id            String   @id
+  name          String
+  description   String?
+  tags          Json
+  createdAt     DateTime
+  updatedAt     DateTime
+  versionsCount Int      @default(1)
+  userId        String?
+
+  promptRuns PromptRun[]
+}
+
+model PromptRun {
+  id          String   @id
+  projectId   String
+  projectName String
+  date        DateTime
+
+  promptA    String
+  promptB    String
+  variables  Json
+
+  outputA String
+  outputB String
+
+  latencyA Float
+  latencyB Float
+
+  tokensA Int
+  tokensB Int
+
+  costA Float
+  costB Float
+
+  winner String?
+  scores Json
+  userId String?
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
