@@ -225,6 +225,101 @@ const io = new Server(server, {
   }
 });
 
+// Real-Time Socket.io Stream Comparison Handlers
+io.on('connection', (socket) => {
+  console.log(`[Socket.io] Client connected: ${socket.id}`);
+
+  socket.on('compare-prompts', async (data) => {
+    try {
+      const {
+        projectId,
+        projectName,
+        promptA,
+        promptB,
+        variables = {},
+        apiKeys = {},
+        userEmail = 'guest@promptflow.ai'
+      } = data;
+
+      const providerA = apiKeys.providerA || 'mock';
+      const providerB = apiKeys.providerB || 'mock';
+      const keyA = providerA === 'openai' ? apiKeys.openai : apiKeys.gemini;
+      const keyB = providerB === 'openai' ? apiKeys.openai : apiKeys.gemini;
+
+      const [resA, resB] = await Promise.all([
+        runPromptStream({
+          prompt: promptA,
+          variables,
+          provider: providerA,
+          apiKey: keyA,
+          onToken: (token) => socket.emit('token-a', token),
+        }).then((res) => {
+          socket.emit('done-a', res);
+          return res;
+        }),
+        runPromptStream({
+          prompt: promptB,
+          variables,
+          provider: providerB,
+          apiKey: keyB,
+          onToken: (token) => socket.emit('token-b', token),
+        }).then((res) => {
+          socket.emit('done-b', res);
+          return res;
+        }),
+      ]);
+
+      const scores = runAutomatedEvaluation(resA.fullText, resB.fullText, promptA, promptB);
+      const winner =
+        resA.latency < resB.latency && scores.overall >= 8.5
+          ? 'A'
+          : resB.latency < resA.latency && scores.overall >= 8.5
+          ? 'B'
+          : scores.accuracy > 8.8
+          ? 'A'
+          : 'B';
+
+      const runResult: PromptRun = {
+        id: `run-${Date.now()}`,
+        projectId,
+        projectName,
+        date: new Date().toISOString(),
+        promptA,
+        promptB,
+        variables,
+        outputA: resA.fullText,
+        outputB: resB.fullText,
+        latencyA: resA.latency,
+        latencyB: resB.latency,
+        tokensA: resA.tokensCount,
+        tokensB: resB.tokensCount,
+        costA: resA.cost,
+        costB: resB.cost,
+        winner,
+        scores,
+        userId: userEmail,
+      };
+
+      try {
+        await createHistory(runResult);
+        await updateProjectTimestamp(projectId);
+      } catch (e) {
+        console.warn('Failed to persist run to DB:', e);
+      }
+
+      socket.emit('comparison-finished', runResult);
+    } catch (err: any) {
+      console.error('Error during prompt comparison:', err);
+      socket.emit('error', err?.message || 'An error occurred during comparison');
+    }
+  });
+
+  socket.on('disconnect', () => {
+    console.log(`[Socket.io] Client disconnected: ${socket.id}`);
+  });
+});
+
+
 // REST API Endpoints
 
 // Projects endpoints
